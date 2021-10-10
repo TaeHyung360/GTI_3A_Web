@@ -4,13 +4,13 @@ require("dotenv").config();
 
 const Logica = require("../logica/Logica.js");
 
-function cargarLogica(database, host, user, password, port, dialect){
+function cargarLogica(database, host, user, password, port, dialect) {
 
-    return new Logica(database,user,password,host,port,dialect);
+    return new Logica(database, user, password, host, port, dialect);
 
 }
 
-async function main(){
+async function main() {
 
     let laLogica = cargarLogica(
         process.env.DATABASE,
@@ -26,10 +26,10 @@ async function main(){
     let Medicion = laLogica.cargarModelos();
 
     let servidorExpress = express();
-    
+
     servidorExpress.use(express.json());
 
-    servidorExpress.use((req, res,next)=> {
+    servidorExpress.use((req, res, next) => {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
         res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
@@ -41,13 +41,13 @@ async function main(){
 
     reglas.cargar(servidorExpress, laLogica, Medicion);
 
-    let servicio = servidorExpress.listen(process.env.PORT, function(){
-    console.log(`Servidor REST escuchando en el puerto ${process.env.PORT}`);
+    let servicio = servidorExpress.listen(process.env.PORT, function () {
+        console.log(`Servidor REST escuchando en el puerto ${process.env.PORT}`);
     });
 
-    process.on("SIGINT", function() {
-        console.log (" terminando ")
-        servicio.close ()
+    process.on("SIGINT", function () {
+        console.log(" terminando ")
+        servicio.close()
     })
 
 }

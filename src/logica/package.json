@@ -6,6 +6,7 @@
   "author": "Juan Ferrera Sala",
   "license": "MIT",
   "dependencies": {
+    "mocha": "9.1.2",
     "mysql2": "2.3.0",
     "sequelize": "6.6.5"
   }

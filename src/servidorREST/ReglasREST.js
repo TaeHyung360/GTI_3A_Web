@@ -1,29 +1,29 @@
-module.exports.cargar = function( servidorExpress, laLogica, Medicion ) {
+module.exports.cargar = function (servidorExpress, laLogica, Medicion) {
 
     // .......................................................
     // GET /prueba
     // .......................................................
-    servidorExpress.get("/prueba",function( peticion, respuesta ){
+    servidorExpress.get("/prueba", function (peticion, respuesta) {
 
-        console.log( " * GET /prueba " )
+        console.log(" * GET /prueba ")
 
-        respuesta.send( "¡Funciona!" )
+        respuesta.send("¡Funciona!")
 
     }) // get /prueba
 
     // .......................................................
     // POST /medicion
     // .......................................................
-    servidorExpress.post("/medicion", async function( peticion, respuesta ){
+    servidorExpress.post("/medicion", async function (peticion, respuesta) {
 
-        console.log( " * POST /medicion " )
+        console.log(" * POST /medicion ")
 
         const data = peticion.body;
 
-        try{
-            await laLogica.insertarMedicion(Medicion,data);
+        try {
+            await laLogica.insertarMedicion(Medicion, data);
             respuesta.sendStatus(201);
-        }catch{
+        } catch {
             respuesta.sendStatus(404);
         }
 
@@ -32,14 +32,14 @@ module.exports.cargar = function( servidorExpress, laLogica, Medicion ) {
     // .......................................................
     // GET /obtenerTodasLasMediciones
     // .......................................................
-    servidorExpress.get("/obtenerTodasLasMediciones",async function( peticion, respuesta ){
+    servidorExpress.get("/obtenerTodasLasMediciones", async function (peticion, respuesta) {
 
-        console.log( " * GET /obtenerTodasLasMediciones" )
-        
+        console.log(" * GET /obtenerTodasLasMediciones")
+
         const mediciones = await laLogica.obtenerTodasLasMediciones(Medicion);
-        if(mediciones.length>0){
+        if (mediciones.length > 0) {
             respuesta.send(mediciones);
-        }else{ 
+        } else {
             respuesta.sendStatus(404);
         }
     }) // get /obtenerTodasLasMediciones
@@ -47,16 +47,16 @@ module.exports.cargar = function( servidorExpress, laLogica, Medicion ) {
     // .......................................................
     // POST /obtenerUltimasMediciones
     // .......................................................
-    servidorExpress.post("/obtenerUltimasMediciones",async function( peticion, respuesta ){
+    servidorExpress.post("/obtenerUltimasMediciones", async function (peticion, respuesta) {
         const fecha = peticion.body.fecha;
-        if(fecha!=null){
-            const mediciones = await laLogica.obtenerUltimasMediciones(Medicion,fecha);
-            if(mediciones.length>0){
+        if (fecha != null) {
+            const mediciones = await laLogica.obtenerUltimasMediciones(Medicion, fecha);
+            if (mediciones.length > 0) {
                 respuesta.send(mediciones).status(200);
-            }else{ 
+            } else {
                 respuesta.sendStatus(404);
             }
-        }else{
+        } else {
             respuesta.sendStatus(400);
         }
     }) // post /obtenerUltimasMediciones
