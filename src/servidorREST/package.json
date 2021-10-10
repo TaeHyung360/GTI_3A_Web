@@ -1,0 +1,21 @@
+{
+  "name": "servidorgti3a",
+  "version": "0.0.1",
+  "description": "servidor del proyecto de gti 3a",
+  "main": "mainServidorREST.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+   "servidor": "node mainServidorREST.js"
+  },
+  "author": "Juan Ferrera Sala",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "10.0.0",
+    "express": "4.17.1"
+  },
+  "devDependencies": {
+    "mocha": "9.1.2"
+  }
+}

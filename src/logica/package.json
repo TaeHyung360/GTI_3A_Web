@@ -1,0 +1,13 @@
+{
+  "name": "logica",
+  "version": "0.0.1",
+  "description": "",
+  "main": "Logica.js",
+  "author": "Juan Ferrera Sala",
+  "license": "MIT",
+  "dependencies": {
+    "mocha": "^9.1.2",
+    "mysql2": "2.3.0",
+    "sequelize": "6.6.5"
+  }
+}
