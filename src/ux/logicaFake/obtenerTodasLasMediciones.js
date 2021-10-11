@@ -1,9 +1,10 @@
 const IP_PUERTO = "http://localhost:8081"
 // ---------------------------------------------------
 //
-// versión fake de una función de la lógica
+// Versión fake de una función de la lógica
 //
-// dni:Texto, obtenerPersonaDNI() -> nombre:texto
+// obtenerTodasMediciones() <-
+// -> [{valor: N, fecha: N, idMedicion: N, idSensor: N, latitud: R, logitud: R}]
 //
 // ---------------------------------------------------
 function obtenerTodasLasMediciones(cb) {

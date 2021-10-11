@@ -2,6 +2,12 @@ const Sequelize = require("sequelize");
 const { DataTypes } = require("sequelize");
 const { Op } = require("sequelize");
 module.exports = class Logica {
+
+    // .................................................................
+    // database:texto, user:texto, password:texto, host:texto, port:texto, dialect:texto
+    // -->
+    // constructor () -->
+    // .................................................................
     constructor(database, user, password, host, port, dialect) {
         this.laConexion = new Sequelize(database, user, password, {
             host: host,
@@ -9,6 +15,7 @@ module.exports = class Logica {
             dialect: dialect,
         });
     }
+
     cargarModelos() {
         return this.laConexion.define("Medicion", {
             idMedicion: {
@@ -46,20 +53,23 @@ module.exports = class Logica {
         });
     }
     // .................................................................
-    // insertarMedicion()
+    // modelo Medicion {idUsuario: texto, valor: N, fecha: N, idMedicion: N, idSensor: N, latitud: R, logitud: R} ->
+    // insertarMedicion()->
     // .................................................................
     async insertarMedicion(Medicion, body) {
         await Medicion.create(body);
     }
     // .................................................................
-    // obtenerTodasLasMediciones()
+    //obtenerTodasMediciones() <-
+    //-> [{valor: N, fecha: N, idMedicion: N, idSensor: N, latitud: R, logitud: R}]
     // .................................................................
     async obtenerTodasLasMediciones(Medicion) {
         const mediciones = await Medicion.findAll();
         return mediciones;
     }
     // .................................................................
-    // obtenerUltimasMediciones()
+    // fecha: N  -> obtenerUltimasMediciones() <-
+    // -> [{valor: N, fecha: N, idMedicion: N, idSensor: N, latitud: R, logitud: R}]
     // .................................................................
     async obtenerUltimasMediciones(Medicion, fecha) {
         //Op es un modulo de sequelize para utilizar operadores

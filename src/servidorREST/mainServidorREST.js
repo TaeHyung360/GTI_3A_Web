@@ -1,15 +1,24 @@
+//--------------------------------------------------------------------------------
+// MainServidorREST
+//
+// Autor: Juan Ferrera Sala
+//--------------------------------------------------------------------------------
+//Importamos elementos necesarios
 const express = require( "express" );
-
 require("dotenv").config();
-
 const Logica = require("../logica/Logica.js");
+//--------------------------------------------------------------------------------
 
 function cargarLogica(database, host, user, password, port, dialect) {
 
     return new Logica(database, user, password, host, port, dialect);
 
 }
+//--------------------------------------------------------------------------------
+//Funcion main()
+//--------------------------------------------------------------------------------
 
+//Cargamos los datos que se encuentran en el archivo .env los datos necesarios para en la logica
 async function main() {
 
     let laLogica = cargarLogica(
@@ -21,10 +30,10 @@ async function main() {
         process.env.DATABASE_DIALECT
     )
 
-    //await laLogica.testConexiones();
-
+    //Cargamos el modelo de la medicion
     let Medicion = laLogica.cargarModelos();
 
+    //Creo el servidor
     let servidorExpress = express();
 
     servidorExpress.use(express.json());
@@ -37,14 +46,17 @@ async function main() {
         next();
     });
 
+    //Cargamos las reglas REST
     let reglas = require("./ReglasREST.js");
 
     reglas.cargar(servidorExpress, laLogica, Medicion);
 
+    //Arranco el servidor
     let servicio = servidorExpress.listen(process.env.PORT, function () {
         console.log(`Servidor REST escuchando en el puerto ${process.env.PORT}`);
     });
 
+    //Pulsando la tecla Ctrl + c podemos cerrar el servicio
     process.on("SIGINT", function () {
         console.log(" terminando ")
         servicio.close()
