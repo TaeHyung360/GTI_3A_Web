@@ -6,8 +6,15 @@
   "author": "Juan Ferrera Sala",
   "license": "MIT",
   "dependencies": {
-    "mocha": "9.1.2",
     "mysql2": "2.3.0",
     "sequelize": "6.6.5"
+  },
+  "devDependencies": {
+    "mocha": "9.1.2",
+    "request": "2.88.2"
+  },
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha",
+    "ayuda": "echo ejecuta esto: npm test"
   }
 }
