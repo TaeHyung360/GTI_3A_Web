@@ -24,7 +24,7 @@ module.exports.cargar = function (servidorExpress, laLogica, Medicion) {
             await laLogica.insertarMedicion(Medicion, data);
             respuesta.sendStatus(201);
         } catch {
-            respuesta.sendStatus(404);
+            respuesta.sendStatus(400);
         }
 
     }) // post /medicion

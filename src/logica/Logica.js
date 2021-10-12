@@ -32,7 +32,7 @@ module.exports = class Logica {
                 allowNull: false,
             },
             fecha: {
-                type: DataTypes.DATE,
+                type: 'TIMESTAMP',
                 allowNull: false,
             },
             idSensor: {
