@@ -23,7 +23,7 @@
     <script>
         function ObtenerUltimasMedicionesPulsado() {
             document.getElementById("salidaSalidaUltimasMediciones").innerHTML = "";
-            var codigo = document.getElementById("codigoFecha").value
+            var codigo = document.getElementById("nUltimasMediciones").value
             // llamo a la función de la lógica (versión fake)
             obtenerUltimasMediociones(codigo, function (res) {
                 // cuando tenga el resultado lo muestro
@@ -50,8 +50,8 @@
     <p>Obtener Ultimas Mediciones</p>
 
     <form>
-        Fecha desde donde quiere obtener mediciones:<br>
-        <input id="codigoFecha" type="date" name="codigoFecha" value="">
+        Numero de ultimas mediciones a mostrar:<br>
+        <input id="nUltimasMediciones" type="nUltimasMediciones" name="nUltimasMediciones" value="">
         <br>
     </form>
 

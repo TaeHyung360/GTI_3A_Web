@@ -41,9 +41,9 @@ describe("Test 1, prueba de todos los GET y POST", function () {
             assert.equal( respuesta.statusCode, 200, "¿El código no es 200 (OK)" )
 
             var solucion = JSON.parse( carga )
-            assert.equal(new Date(solucion[0].fecha).toString(), "Tue Oct 05 2021 15:55:32 GMT+0200 (hora de verano de Europa central)", "¿La fecha no es 2021-10-05 15:55:32.000Z?")
-            assert.equal(new Date(solucion[1].fecha).toString(), "Wed Oct 06 2021 16:18:17 GMT+0200 (hora de verano de Europa central)", "¿La fecha no es 2021-10-12?")
-            assert.equal(new Date(solucion[2].fecha).toString(), "Tue Oct 12 2021 16:21:02 GMT+0200 (hora de verano de Europa central)", "¿La fecha no es 2021-10-12?")
+            assert.equal(new Date(solucion[0].fecha).toString(), "Fri Oct 15 2021 13:09:25 GMT+0200 (hora de verano de Europa central)", "¿La fecha no es 2021-10-15")
+            assert.equal(new Date(solucion[1].fecha).toString(), "Mon Oct 11 2021 13:08:57 GMT+0200 (hora de verano de Europa central)", "¿La fecha no es 2021-10-11?")
+            assert.equal(new Date(solucion[2].fecha).toString(), "Tue Oct 19 2021 13:09:51 GMT+0200 (hora de verano de Europa central)", "¿La fecha no es 2021-10-19?")
             hecho()
 
         } // callback
@@ -56,34 +56,29 @@ describe("Test 1, prueba de todos los GET y POST", function () {
     // ....................................................
     // ....................................................
     
-    it("probar POST /obtenerUltimasMediciones", function (hecho) {
+    it("probar GET /obtenerUltimasMediciones", function (hecho) {
 
-        var datos = { fecha: "2021-10-5" }
+        request.get({ url : IP_PUERTO+"/obtenerUltimasMediciones/"+2,
 
-        request.post({ url : IP_PUERTO+"/obtenerUltimasMediciones",
+        headers : { "User-Agent" : "juan" }},
 
-            headers : { "User-Agent" : "juan" , "Content-Type" : "application/json" },
+        function( err, respuesta, carga ) {
 
-            body : JSON.stringify( datos )
+            assert.equal( err, null, "¿ha habido un error?" )
+            assert.equal( respuesta.statusCode, 200, "¿El código no es 200 (OK)" )
 
-            },
+            var solucion = JSON.parse( carga )
+            assert.equal(solucion.length, 2, "No da 2 elementos")
+            assert.equal(new Date(solucion[0].fecha).toString(), "Tue Oct 19 2021 13:09:51 GMT+0200 (hora de verano de Europa central)", "¿La fecha no es 2021-10-19")
+            assert.equal(new Date(solucion[1].fecha).toString(), "Fri Oct 15 2021 13:09:25 GMT+0200 (hora de verano de Europa central)", "¿La fecha no es 2021-10-11?")
+            hecho()
 
-            function( err, respuesta, carga ) {
+        } // callback
 
-                var solucion = JSON.parse( carga )
+    ) // .get
 
-                assert.equal( err, null, "¿ha habido un error?" )
-                assert.equal( respuesta.statusCode, 200, "¿El código no es 200 (OK)" )
-                assert.equal(new Date(solucion[1].fecha).toString(), "Wed Oct 06 2021 16:18:17 GMT+0200 (hora de verano de Europa central)", "¿La fecha no es 2021-10-12?")
-                assert.equal(new Date(solucion[2].fecha).toString(), "Tue Oct 12 2021 16:21:02 GMT+0200 (hora de verano de Europa central)", "¿La fecha no es 2021-10-12?")
-                hecho()
-
-            } // callback
-
-        ) // .post
 
     }) // it
-
     // ....................................................
     // ....................................................
     it("probar POST /medicion", function (hecho) {

@@ -1,3 +1,5 @@
+const common = require("mocha/lib/interfaces/common")
+
 module.exports.cargar = function (servidorExpress, laLogica, Medicion) {
 
     // .......................................................
@@ -45,19 +47,23 @@ module.exports.cargar = function (servidorExpress, laLogica, Medicion) {
     }) // get /obtenerTodasLasMediciones
 
     // .......................................................
-    // POST /obtenerUltimasMediciones
+    // GET /obtenerUltimasMediciones
     // .......................................................
-    servidorExpress.post("/obtenerUltimasMediciones", async function (peticion, respuesta) {
-        const fecha = peticion.body.fecha;
-        if (fecha != null) {
-            const mediciones = await laLogica.obtenerUltimasMediciones(Medicion, fecha);
-            if (mediciones.length > 0) {
-                respuesta.send(mediciones).status(200);
-            } else {
-                respuesta.sendStatus(404);
-            }
+    servidorExpress.get("/obtenerUltimasMediciones/:numeroDeUltimasMediciones", async function (peticion, respuesta) {
+
+        console.log(" * GET /obtenerUltimasMediciones")
+
+        let numeroDeMediciones;
+        
+        numeroDeMediciones = parseInt(peticion.params.numeroDeUltimasMediciones,10);
+        
+        const mediciones = await laLogica.obtenerUltimasMediciones(Medicion,numeroDeMediciones);
+
+        if (mediciones.length > 0) {
+            respuesta.send(mediciones).status(200);
         } else {
-            respuesta.sendStatus(400);
+            respuesta.sendStatus(404);
         }
-    }) // post /obtenerUltimasMediciones
+
+    }) // get /obtenerTodasLasMediciones
 }

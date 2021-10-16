@@ -67,19 +67,16 @@ module.exports = class Logica {
         const mediciones = await Medicion.findAll();
         return mediciones;
     }
+
     // .................................................................
     // fecha: N  -> obtenerUltimasMediciones() <-
     // -> [{valor: N, fecha: N, idMedicion: N, idSensor: N, latitud: R, logitud: R}]
     // .................................................................
-    async obtenerUltimasMediciones(Medicion, fecha) {
-        //Op es un modulo de sequelize para utilizar operadores
-        //gte = a mayor o igual
+    async obtenerUltimasMediciones(Medicion, numeroDeUltimasMediciones) {
+        //DESC orden descendiente
         const mediciones = await Medicion.findAll({
-            where: {
-                fecha: {
-                    [Op.gte]: fecha,
-                }
-            },
+            order:[["fecha","DESC"]],
+            limit: numeroDeUltimasMediciones
         });
         return mediciones;
     }
