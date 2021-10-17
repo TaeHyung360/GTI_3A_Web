@@ -1,3 +1,10 @@
+//--------------------------------------------------------------------------------
+// Logica
+//
+// Autor: Juan Ferrera Sala
+// Fecha: 9/10/21
+// Descripcion: clase logica con las funciones que realiza nuestra app web
+//--------------------------------------------------------------------------------
 const Sequelize = require("sequelize");
 const { DataTypes } = require("sequelize");
 const { Op } = require("sequelize");
@@ -56,6 +63,13 @@ module.exports = class Logica {
     // modelo Medicion {idUsuario: texto, valor: N, fecha: N, idMedicion: N, idSensor: N, latitud: R, logitud: R} ->
     // insertarMedicion()->
     // .................................................................
+    /**
+    * Funcion que inserta en la BBDD una medicion
+    *
+    * @param Medicion tabla de la BBDD 
+    * @param body contenido a insertar
+    *
+    */
     async insertarMedicion(Medicion, body) {
         await Medicion.create(body);
     }
@@ -63,15 +77,28 @@ module.exports = class Logica {
     //obtenerTodasMediciones() <-
     //-> [{valor: N, fecha: N, idMedicion: N, idSensor: N, latitud: R, logitud: R}]
     // .................................................................
+    /**
+    * Funcion que obtiene todas las mediciones de la BBDD
+    *
+    * @param Medicion tabla de la BBDD 
+    * @returns todas las mediciones 
+    */
     async obtenerTodasLasMediciones(Medicion) {
         const mediciones = await Medicion.findAll();
         return mediciones;
     }
 
     // .................................................................
-    // fecha: N  -> obtenerUltimasMediciones() <-
+    // numeroDeUltimasMediciones: N  -> obtenerUltimasMediciones() <-
     // -> [{valor: N, fecha: N, idMedicion: N, idSensor: N, latitud: R, logitud: R}]
     // .................................................................
+    /**
+    * Funcion que obtiene las ultimas mediciones a partir de un numero
+    *
+    * @param Medicion tabla de la BBDD 
+    * @param numeroDeUltimasMediciones numero de ultimas mediciones
+    * @returns ultimas mediciones 
+    */
     async obtenerUltimasMediciones(Medicion, numeroDeUltimasMediciones) {
         //DESC orden descendiente
         const mediciones = await Medicion.findAll({

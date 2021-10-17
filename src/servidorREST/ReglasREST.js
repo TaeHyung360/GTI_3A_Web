@@ -1,3 +1,10 @@
+//--------------------------------------------------------------------------------
+// ReglasREST
+//
+// Autor: Juan Ferrera Sala
+// Fecha: 9/10/21
+// Descripcion: Definicion de todas las reglas REST que se utilizan en la app
+//--------------------------------------------------------------------------------
 const common = require("mocha/lib/interfaces/common")
 
 module.exports.cargar = function (servidorExpress, laLogica, Medicion) {

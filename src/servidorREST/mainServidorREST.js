@@ -2,6 +2,8 @@
 // MainServidorREST
 //
 // Autor: Juan Ferrera Sala
+// Fecha: 9/10/21
+// Descripcion: inicializa todo el servidor
 //--------------------------------------------------------------------------------
 //Importamos elementos necesarios
 const express = require( "express" );
